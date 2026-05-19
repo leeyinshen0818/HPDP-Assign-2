@@ -9,7 +9,7 @@
 
 _(Please replace with your actual names and matric numbers prior to final submission)_
 
-- **Student 1:** [Name] ([Matric Number])
+- **Student 1:** [Brendan Chia Yan Fei] ([A23CS0211])
 - **Student 2:** [Name] ([Matric Number])
 
 ## 📌 Introduction
