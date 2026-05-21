@@ -6,9 +6,8 @@
 | :--------- | :---------------------------------------- |
 | Course     | SECP3133 High Performance Data Processing |
 | Assignment | Assignment 2: Mastering Big Data Handling |
-| Group Name | **[Insert Group Name]**                   |
-| Member 1   | **[Insert Name] - [Insert Matric No.]**   |
-| Member 2   | **[Insert Name] - [Insert Matric No.]**   |
+| Member 1   | **LEE YIN SHEN - A23CS0236**              |
+| Member 2   | **BRENDAN CHIA YAN FEI - A23CS0211**      |
 
 ---
 
@@ -18,17 +17,17 @@ This assignment uses a large Airbnb listings dataset named `airbnb_listings.csv`
 
 The dataset is suitable for this assignment because it is larger than 700 MB and contains a mixture of numerical, categorical, and text-based columns. This makes it appropriate for applying different big data handling strategies such as loading fewer columns, chunking, data type optimisation, sampling, and scalable processing using Dask and Polars.
 
-| Attribute         | Description                          |
-| :---------------- | :----------------------------------- |
-| Dataset Name      | Airbnb Listings Dataset              |
-| File Name         | `airbnb_listings.csv`                |
-| Source            | **[Insert dataset source URL here]** |
-| Domain            | Hospitality / Travel Accommodation   |
-| File Size         | 1846.24 MB                           |
-| Number of Rows    | 494,954                              |
-| Number of Columns | 89                                   |
-| File Format       | CSV                                  |
-| Separator         | Semicolon `;`                        |
+| Attribute         | Description                                                |
+| :---------------- | :--------------------------------------------------------- |
+| Dataset Name      | Airbnb Listings Dataset                                    |
+| File Name         | `airbnb_listings.csv`                                      |
+| Source            | **https://www.kaggle.com/datasets/joebeachcapital/airbnb** |
+| Domain            | Hospitality / Travel Accommodation                         |
+| File Size         | 1846.24 MB                                                 |
+| Number of Rows    | 494,954                                                    |
+| Number of Columns | 89                                                         |
+| File Format       | CSV                                                        |
+| Separator         | Semicolon `;`                                              |
 
 The dataset is large enough to demonstrate the limitations of traditional Pandas processing and the benefits of using scalable data processing techniques.
 
@@ -896,16 +895,6 @@ Overall, this assignment helped me understand the importance of memory managemen
 
 # References
 
-1. Airbnb Listings Dataset. **[Insert dataset source URL here]**
-2. Pandas Documentation: [https://pandas.pydata.org/docs/](https://pandas.pydata.org/docs/)
-3. Dask DataFrame Documentation: [https://docs.dask.org/en/stable/dataframe.html](https://docs.dask.org/en/stable/dataframe.html)
-4. Polars Documentation: [https://docs.pola.rs/](https://docs.pola.rs/)
-5. Matplotlib Documentation: [https://matplotlib.org/stable/index.html](https://matplotlib.org/stable/index.html)
+1. Airbnb Listings Dataset. **[\[Insert dataset source URL here\]](https://www.kaggle.com/datasets/joebeachcapital/airbnb)**
 
-```
-
-Two important fixes before you paste and submit:
-
-1. Replace every **`[Insert ...]`** part.
-2. Rename your notebook from `HPDP_A2.ipynb` to **`big_data.ipynb`**, because the assignment structure expects that name.
-```
+---
