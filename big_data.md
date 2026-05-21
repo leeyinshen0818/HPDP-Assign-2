@@ -173,17 +173,17 @@ These columns were chosen because they are useful for understanding listing char
 
 ---
 
-# 6. Big Data Handling Strategies
+## 6. Big Data Handling Strategies
 
-## 6.1 Strategy 1: Load Less Data
+### 6.1 Strategy 1: Load Less Data
 
-### Explanation
+#### Explanation
 
 The first strategy is to load only the columns needed for analysis instead of loading the full dataset. This reduces memory usage and loading time because unnecessary columns are skipped during the read operation.
 
 This is one of the easiest and most effective big data handling strategies. If a dataset has many columns but only some of them are required, loading fewer columns can significantly reduce memory consumption.
 
-### Code: Loading All Columns Sample
+#### Code: Loading All Columns Sample
 
 ```python
 start = time.time()
@@ -204,7 +204,7 @@ print("All columns memory usage:", round(all_columns_memory, 2), "MB")
 print("All columns loading time:", round(all_columns_time, 2), "seconds")
 ```
 
-### Output
+#### Output
 
 ```text
 All columns sample shape: (100000, 89)
@@ -212,7 +212,7 @@ All columns memory usage: 649.52 MB
 All columns loading time: 9.85 seconds
 ```
 
-### Code: Loading Selected Columns Sample
+#### Code: Loading Selected Columns Sample
 
 ```python
 start = time.time()
@@ -234,7 +234,7 @@ print("Selected columns memory usage:", round(less_columns_memory, 2), "MB")
 print("Selected columns loading time:", round(less_columns_time, 2), "seconds")
 ```
 
-### Output
+#### Output
 
 ```text
 Selected columns sample shape: (100000, 20)
@@ -242,7 +242,7 @@ Selected columns memory usage: 138.69 MB
 Selected columns loading time: 4.81 seconds
 ```
 
-### Memory Reduction Calculation
+#### Memory Reduction Calculation
 
 ```python
 memory_saved = all_columns_memory - less_columns_memory
@@ -252,14 +252,14 @@ print("Memory saved:", round(memory_saved, 2), "MB")
 print("Memory reduction:", round(memory_reduction, 2), "%")
 ```
 
-### Output
+#### Output
 
 ```text
 Memory saved: 510.83 MB
 Memory reduction: 78.65 %
 ```
 
-### Discussion
+#### Discussion
 
 Loading only 20 selected columns instead of all 89 columns reduced memory usage from 649.52 MB to 138.69 MB for 100,000 rows. This saved 510.83 MB of memory, giving a memory reduction of 78.65%.
 
@@ -267,15 +267,15 @@ The loading time also improved from 9.85 seconds to 4.81 seconds. This shows tha
 
 ---
 
-## 6.2 Strategy 2: Chunking
+### 6.2 Strategy 2: Chunking
 
-### Explanation
+#### Explanation
 
 Chunking means reading a large file in smaller portions instead of loading the entire dataset into memory at once. This is useful when the full dataset is too large to fit comfortably in memory.
 
 For this strategy, the dataset was processed in chunks of 100,000 rows. The analysis calculated the average number of reviews for each room type.
 
-### Code
+#### Code
 
 ```python
 chunk_size = 100000
@@ -316,7 +316,7 @@ print(chunk_result)
 print("Chunking execution time:", round(chunking_time, 2), "seconds")
 ```
 
-### Output
+#### Output
 
 ```text
 Average number of reviews by room type:
@@ -330,7 +330,7 @@ Average number of reviews by room type:
 Chunking execution time: 25.82 seconds
 ```
 
-### Discussion
+#### Discussion
 
 Chunking allowed the full dataset to be processed without loading all rows into memory at once. This is useful for large datasets because only one chunk exists in memory at a time.
 
@@ -342,15 +342,15 @@ The chunking method took 25.82 seconds. Although it was not the fastest method, 
 
 ---
 
-## 6.3 Strategy 3: Data Type Optimisation
+### 6.3 Strategy 3: Data Type Optimisation
 
-### Explanation
+#### Explanation
 
 When Pandas loads data, it often uses default data types such as `int64`, `float64`, and `object`. These types may use more memory than necessary.
 
 Data type optimisation reduces memory usage by converting columns into more efficient types. For example, repeated text values can be converted into `category`, and large numeric types can be downcast into smaller numeric types such as `float32` or `int32`.
 
-### Code: Load Selected Columns
+#### Code: Load Selected Columns
 
 ```python
 df_opt = pd.read_csv(
@@ -366,7 +366,7 @@ print("Before optimisation memory:", round(before_opt_memory, 2), "MB")
 print(df_opt.dtypes)
 ```
 
-### Output
+#### Output
 
 ```text
 Before optimisation memory: 138.69 MB
@@ -394,7 +394,7 @@ Review Scores Rating    float64
 dtype: object
 ```
 
-### Code: Convert Categorical Columns
+#### Code: Convert Categorical Columns
 
 ```python
 category_cols = [
@@ -411,7 +411,7 @@ for col in category_cols:
         df_opt[col] = df_opt[col].astype("category")
 ```
 
-### Code: Downcast Numeric Columns
+#### Code: Downcast Numeric Columns
 
 ```python
 integer_cols = [
@@ -441,7 +441,7 @@ for col in float_cols:
         df_opt[col] = pd.to_numeric(df_opt[col], errors="coerce", downcast="float")
 ```
 
-### Code: Measure Optimised Memory
+#### Code: Measure Optimised Memory
 
 ```python
 after_opt_memory = get_memory_mb(df_opt)
@@ -456,7 +456,7 @@ print("Reduction percentage:", round(opt_reduction, 2), "%")
 print(df_opt.dtypes)
 ```
 
-### Output
+#### Output
 
 ```text
 Before optimisation: 138.69 MB
@@ -487,7 +487,7 @@ Review Scores Rating     float32
 dtype: object
 ```
 
-### Discussion
+#### Discussion
 
 Data type optimisation reduced memory usage from 138.69 MB to 110.82 MB. This saved 27.87 MB, which is a further reduction of 20.09%.
 
@@ -497,15 +497,15 @@ However, data type optimisation requires understanding the data. If a column is 
 
 ---
 
-## 6.4 Strategy 4: Sampling
+### 6.4 Strategy 4: Sampling
 
-### Explanation
+#### Explanation
 
 Sampling means using a smaller subset of the dataset for faster analysis and development. Instead of running every experiment on the full dataset, a sample can be used to test code and explore patterns quickly.
 
 In this assignment, 300,000 rows were first loaded from the dataset, then a 10% random sample was taken. This produced a sample of 30,000 rows.
 
-### Code
+#### Code
 
 ```python
 start = time.time()
@@ -528,7 +528,7 @@ print("10% sampled shape:", sample_df.shape)
 print("Sampling execution time:", round(sampling_time, 2), "seconds")
 ```
 
-### Output
+#### Output
 
 ```text
 Original sample shape: (300000, 20)
@@ -536,7 +536,7 @@ Original sample shape: (300000, 20)
 Sampling execution time: 17.25 seconds
 ```
 
-### Code: Analysis on Sample
+#### Code: Analysis on Sample
 
 ```python
 sample_df = clean_price_column(sample_df)
@@ -546,7 +546,7 @@ sample_price_result = sample_df.groupby("Room Type")["Price"].mean()
 sample_price_result
 ```
 
-### Output
+#### Output
 
 ```text
 Room Type
@@ -556,7 +556,7 @@ Shared room         63.626118
 Name: Price, dtype: float64
 ```
 
-### Discussion
+#### Discussion
 
 The sampling strategy made it possible to perform quick analysis on a smaller dataset. The result showed that `Entire home/apt` listings had the highest average price, followed by `Private room` and `Shared room`.
 
@@ -564,9 +564,9 @@ Sampling is useful during the early stages of analysis because it allows faster 
 
 ---
 
-## 6.5 Strategy 5: Parallel and Lazy Processing with Dask and Polars
+### 6.5 Strategy 5: Parallel and Lazy Processing with Dask and Polars
 
-### Explanation
+#### Explanation
 
 The final strategy used scalable libraries to process the dataset more efficiently. Dask and Polars were compared with Pandas using the same type of analysis: calculating the average number of reviews by room type.
 
@@ -574,7 +574,7 @@ Dask supports parallel processing by dividing the dataset into partitions. Polar
 
 ---
 
-### 6.5.1 Dask Processing
+#### 6.5.1 Dask Processing
 
 ```python
 import dask.dataframe as dd
@@ -603,7 +603,7 @@ print(dask_result)
 print("Dask execution time:", round(dask_time, 2), "seconds")
 ```
 
-### Output
+#### Output
 
 ```text
 Room Type
@@ -617,7 +617,7 @@ Name: Number of Reviews, dtype: float64
 Dask execution time: 33.84 seconds
 ```
 
-### Discussion
+#### Discussion
 
 Dask successfully processed the full dataset and produced the same main results as the Pandas and chunking approaches. However, Dask took 33.84 seconds, which was slower than Pandas and Polars in this experiment.
 
@@ -625,7 +625,7 @@ This may be because the dataset size, although large, was still manageable on a 
 
 ---
 
-### 6.5.2 Polars Lazy Processing
+#### 6.5.2 Polars Lazy Processing
 
 ```python
 import polars as pl
@@ -654,7 +654,7 @@ print(polars_result)
 print("Polars execution time:", round(polars_time, 2), "seconds")
 ```
 
-### Output
+#### Output
 
 ```text
 shape: (5, 2)
@@ -673,7 +673,7 @@ shape: (5, 2)
 Polars execution time: 6.09 seconds
 ```
 
-### Discussion
+#### Discussion
 
 Polars was the fastest library in this experiment, completing the groupby operation in 6.09 seconds. Its lazy execution allowed the query to be optimised before running. This made Polars much faster than both Pandas and Dask for this specific task.
 
@@ -728,9 +728,9 @@ This shows that Pandas can still perform well when only a small number of column
 
 ---
 
-# 8. Comparative Analysis
+## 8. Comparative Analysis
 
-## 8.1 Overall Comparison Table
+### 8.1 Overall Comparison Table
 
 | Method                           | Dataset Used                   | Memory Usage        | Execution Time | Purpose                      |
 | :------------------------------- | :----------------------------- | :------------------ | :------------- | :--------------------------- |
@@ -745,7 +745,7 @@ This shows that Pandas can still perform well when only a small number of column
 
 ---
 
-## 8.2 Memory Usage Comparison
+### 8.2 Memory Usage Comparison
 
 | Method                         | Memory Usage |
 | :----------------------------- | -----------: |
@@ -760,7 +760,7 @@ This shows that the most effective memory-saving strategy was column selection. 
 
 ---
 
-## 8.3 Execution Time Comparison
+### 8.3 Execution Time Comparison
 
 | Method                       | Execution Time |
 | :--------------------------- | -------------: |
@@ -778,7 +778,7 @@ Dask was slower in this experiment because of the overhead involved in task sche
 
 ---
 
-## 8.4 Chart Code Used in Notebook
+### 8.4 Chart Code Used in Notebook
 
 The following code was used to generate the memory usage comparison chart:
 
@@ -842,7 +842,7 @@ plt.show()
 
 ---
 
-## 8.5 Critical Analysis
+### 8.5 Critical Analysis
 
 The results show that different strategies are useful for different purposes.
 
@@ -860,7 +860,7 @@ Dask was slower than expected in this experiment. Although Dask supports paralle
 
 ---
 
-# 9. Benefits and Limitations of Each Strategy
+## 9. Benefits and Limitations of Each Strategy
 
 | Strategy               | Benefits                                                                | Limitations                                                          |
 | :--------------------- | :---------------------------------------------------------------------- | :------------------------------------------------------------------- |
@@ -873,7 +873,7 @@ Dask was slower than expected in this experiment. Although Dask supports paralle
 
 ---
 
-# 10. Conclusion and Reflection
+## 10. Conclusion and Reflection
 
 This assignment demonstrated several practical strategies for handling a large dataset using Python. The Airbnb dataset was 1846.24 MB and contained 494,954 rows with 89 columns, making it suitable for testing big data handling techniques.
 
@@ -893,7 +893,7 @@ Overall, this assignment helped me understand the importance of memory managemen
 
 ---
 
-# References
+## References
 
 1. Airbnb Listings Dataset. **[\[Insert dataset source URL here\]](https://www.kaggle.com/datasets/joebeachcapital/airbnb)**
 
