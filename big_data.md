@@ -778,71 +778,27 @@ Dask was slower in this experiment because of the overhead involved in task sche
 
 ---
 
-### 8.4 Chart Code Used in Notebook
+### 8.4 Memory Usage Comparison Chart
 
-The following code was used to generate the memory usage comparison chart:
+The memory usage comparison chart shows the difference between loading all columns, loading selected columns, applying data type optimisation, and loading only two columns for the Pandas groupby comparison.
 
-```python
-memory_chart = pd.DataFrame({
-    "Method": [
-        "All Columns",
-        "Selected Columns",
-        "Optimised Types",
-        "Pandas GroupBy"
-    ],
-    "Memory Usage MB": [
-        all_columns_memory,
-        less_columns_memory,
-        after_opt_memory,
-        pandas_compare_memory
-    ]
-})
+![Memory Usage Comparison](images/memory_usage_comparison.png)
 
-plt.figure(figsize=(10, 5))
-plt.bar(memory_chart["Method"], memory_chart["Memory Usage MB"])
-plt.title("Memory Usage Comparison")
-plt.xlabel("Method")
-plt.ylabel("Memory Usage (MB)")
-plt.xticks(rotation=20)
-plt.show()
-```
-
-The following code was used to generate the execution time comparison chart:
-
-```python
-time_chart = pd.DataFrame({
-    "Method": [
-        "All Columns Load",
-        "Selected Columns Load",
-        "Chunking",
-        "Sampling",
-        "Pandas GroupBy",
-        "Dask GroupBy",
-        "Polars GroupBy"
-    ],
-    "Execution Time Seconds": [
-        all_columns_time,
-        less_columns_time,
-        chunking_time,
-        sampling_time,
-        pandas_compare_time,
-        dask_time,
-        polars_time
-    ]
-})
-
-plt.figure(figsize=(10, 5))
-plt.bar(time_chart["Method"], time_chart["Execution Time Seconds"])
-plt.title("Execution Time Comparison")
-plt.xlabel("Method")
-plt.ylabel("Execution Time (seconds)")
-plt.xticks(rotation=30)
-plt.show()
-```
+From the chart, the all-column Pandas sample used the most memory at 649.52 MB. After selecting only 20 columns, memory usage dropped to 138.69 MB. Data type optimisation reduced the memory usage further to 110.82 MB.
 
 ---
 
-### 8.5 Critical Analysis
+### 8.5 Execution Time Comparison Chart
+
+The execution time comparison chart shows the runtime difference between the main data handling strategies and library comparisons.
+
+![Execution Time Comparison](images/execution_time_comparison.png)
+
+From the chart, Polars Lazy GroupBy achieved the fastest full-dataset groupby execution time at 6.09 seconds. Dask took the longest at 33.84 seconds, mainly because of partition management and task scheduling overhead.
+
+---
+
+### 8.6 Critical Analysis
 
 The results show that different strategies are useful for different purposes.
 
@@ -895,6 +851,10 @@ Overall, this assignment helped me understand the importance of memory managemen
 
 ## References
 
-1. Airbnb Listings Dataset. **[\[Insert dataset source URL here\]](https://www.kaggle.com/datasets/joebeachcapital/airbnb)**
+1. Airbnb Listings Dataset: [Airbnb dataset](https://www.kaggle.com/datasets/joebeachcapital/airbnb)
+2. Pandas Documentation: https://pandas.pydata.org/docs/
+3. Dask DataFrame Documentation: https://docs.dask.org/en/stable/dataframe.html
+4. Polars Documentation: https://docs.pola.rs/
+5. Matplotlib Documentation: https://matplotlib.org/stable/index.html
 
 ---
